@@ -4,16 +4,16 @@
 int main(void)
 {
 
-    // set PORTB5 as a output
+    // Set PORTB5 as an output
     DDRB = DDRB | (1 << DDB5);
 
     while (1)
     {
-        // set PORTB5
+        // Set PORTB5
         PORTB = PORTB | (1 << PORTB5);
 
         _delay_ms(5000);
-        // unset PORTB5
+        // Unset PORTB5
         PORTB = PORTB & ~(1 << PORTB5);
         _delay_ms(100);
     }
