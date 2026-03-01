@@ -17,7 +17,7 @@ TARGET  = main
 
 # ===== Targets =====
 
-all: $(TARGET).hex
+all: $(TARGET).hex size
 
 $(TARGET).elf: $(TARGET).o
 	$(CC) $(LDFLAGS) $< -o $@
@@ -31,6 +31,9 @@ $(TARGET).hex: $(TARGET).elf
 flash: $(TARGET).hex
 	$(AVRDUDE) -c $(PROGRAMMER) -p $(MCU) -P $(PORT) -b $(BAUD) \
 	-U flash:w:$<
+
+size: $(TARGET).elf
+	avr-size -C --mcu=$(MCU) $<
 
 clean:
 	rm -f *.o *.elf *.hex
