@@ -11,6 +11,6 @@ make all
 make flash
 ```
 
-Now, to be able to see this message, we must connect to serial terminal somehow. I used program called mobaxterm. Start the program, click "Session", pick "Serial", pick the appropriate port and set the speed to 9600. That should do it, you should finally see "hello world" message sent from Arduino.
+Now, to be able to see this message, we must connect to serial terminal somehow. I used program called mobaxterm. Start the program, click "Session", pick "Serial", pick the appropriate port and set the speed to 9600. That should do it, you should finally see a printed message sent from Arduino.
 
 

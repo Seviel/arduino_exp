@@ -1,5 +1,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
+#include <stdio.h>
 
 // Frequenzy = 16000000 hz
 // Baud rate = 9600
@@ -36,13 +37,34 @@ void uart_print(const char *str)
     }
 }
 
+// This function is needed so we can connect stdout to uart
+int uart_putchar(char c, FILE *stream)
+{
+    (void)stream;
+
+    if (c == '\n')
+    {
+        uart_transmit('\r');
+    }
+
+    uart_transmit(c);
+    return 0;
+}
+
+static FILE uart_stdout = FDEV_SETUP_STREAM(uart_putchar, NULL, _FDEV_SETUP_WRITE);
+
 int main(void)
 {
     uart_init();
 
+    stdout = &uart_stdout;
+
+    int i = 0;
     while (1)
     {
-        uart_print("Hello from bare metal world!\r\n");
-        _delay_ms(100000);
+        printf("Loop count: %d\n", i);
+        _delay_ms(3000);
+
+        ++i;
     }
 }
