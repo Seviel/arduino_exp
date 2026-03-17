@@ -15,12 +15,15 @@ LDFLAGS = -mmcu=$(MCU)
 
 TARGET  = main
 
+SRC = $(wildcard *.c)
+OBJ = $(SRC:.c=.o)
+
 # ===== Targets =====
 
 all: $(TARGET).hex size
 
-$(TARGET).elf: $(TARGET).o
-	$(CC) $(LDFLAGS) $< -o $@
+$(TARGET).elf: $(OBJ)
+	$(CC) $(LDFLAGS) -o $@ $^
 
 $(TARGET).o: $(TARGET).c
 	$(CC) $(CFLAGS) -c $< -o $@
